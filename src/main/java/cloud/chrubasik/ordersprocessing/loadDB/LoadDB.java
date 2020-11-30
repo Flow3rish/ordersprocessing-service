@@ -6,7 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import cloud.chrubasik.ordersprocessing.order.Order;
+import cloud.chrubasik.ordersprocessing.order.model.Order;
 import cloud.chrubasik.ordersprocessing.order.jpa.OrderJpaRepository;
 import cloud.chrubasik.ordersprocessing.customer.Customer;
 import cloud.chrubasik.ordersprocessing.customer.jpaService.CustomerJpaRepository;

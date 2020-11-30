@@ -1,37 +1,36 @@
 package cloud.chrubasik.ordersprocessing.order;
 
-import java.util.List;
+import java.util.Set;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import cloud.chrubasik.ordersprocessing.order.model.Order;
+import cloud.chrubasik.ordersprocessing.order.model.OrderToPost;
 
 @RestController
-@RequestMapping("orders")
+@RequestMapping("customers/{customerId}/orders")
 public class OrderController {
+    // TODO napsat dokumentaci
+
     @Autowired
     OrderService service;
 
     @GetMapping
-    public List<EntityModel<Order>> all() {
-        return service.performList();
-    }
-
-    @GetMapping("/{id}")
-    public EntityModel<Order> one(@PathVariable Long id) {
-        return service.performDetail(id);
+    public Set<EntityModel<Order>> all(@PathVariable Long customerId) {
+        return service.performListSetForCustomer(customerId);
     }
 
     @PostMapping
-    public EntityModel<Order> post(@RequestBody final Order orderFromRequest) {
-        return service.performCreate(orderFromRequest);
-        // TODO v requestu nemusi byt cely customer
+    public EntityModel<Order> postOrder(@PathVariable Long customerId,
+            @RequestBody final OrderToPost orderFromRequest) {
+        return service.performCreate(orderFromRequest, customerId);
     }
-    
 }

@@ -1,4 +1,4 @@
-package cloud.chrubasik.ordersprocessing.order;
+package cloud.chrubasik.ordersprocessing.order.model;
 
 public class OrderNotFoundException extends RuntimeException {
 

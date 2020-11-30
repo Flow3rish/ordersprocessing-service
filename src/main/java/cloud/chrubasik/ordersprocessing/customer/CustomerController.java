@@ -1,6 +1,6 @@
 package cloud.chrubasik.ordersprocessing.customer;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
@@ -22,6 +22,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @RestController
 @RequestMapping("customers")
 public class CustomerController {
+    // TODO napsat dokumentaci
 
     @Autowired
     CustomerService service;
@@ -33,7 +34,7 @@ public class CustomerController {
                     content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Customer.class)))}),
     })
     @GetMapping
-    public List<EntityModel<Customer>> all() {
+    public Set<EntityModel<Customer>> all() {
         return service.performList();
     }
 
@@ -44,4 +45,5 @@ public class CustomerController {
     public EntityModel<Customer> one(@PathVariable Long id) {
         return service.performDetail(id);
     }
+
 }

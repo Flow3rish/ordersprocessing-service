@@ -1,4 +1,4 @@
-package cloud.chrubasik.ordersprocessing.order;
+package cloud.chrubasik.ordersprocessing.order.model;
 
 import java.util.Objects;
 
@@ -10,29 +10,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import cloud.chrubasik.ordersprocessing.customer.Customer;
 
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Order extends OrderToPost {
     private @Id @GeneratedValue Long id;
-    private String description;
-    @ManyToOne(fetch = FetchType.EAGER) 
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
-
 
     public Order() {
     }
 
     public Order(String description, Customer customer) {
-        this.description = description;
+        super(description);
         this.customer = customer;
     }
 
-    public Order(Order order) {
-        this.description = order.description;
-        this.customer = order.customer;
+    public Order(OrderToPost otp, Customer customer) {
+        super(otp);
+        this.customer = customer;
     }
 
     public Long getId() {
@@ -41,14 +43,6 @@ public class Order {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Customer getCustomer() {
@@ -82,7 +76,8 @@ public class Order {
             return false;
         }
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(description, order.description) && Objects.equals(customer, order.customer);
+        return Objects.equals(id, order.id) && Objects.equals(description, order.description)
+                && Objects.equals(customer, order.customer);
     }
 
     @Override
@@ -92,12 +87,8 @@ public class Order {
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", customer='" + getCustomer() + "'" +
-            "}";
+        return "{" + " id='" + getId() + "'" + ", description='" + getDescription() + "'" + ", customer='"
+                + getCustomer() + "'" + "}";
     }
-
 
 }

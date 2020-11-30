@@ -1,6 +1,6 @@
 package cloud.chrubasik.ordersprocessing.customer.jpaService;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +28,16 @@ public class CustomerJpaService implements CustomerService {
     }
 
     @Override
-    public List<EntityModel<Customer>> performList() {
+    public Set<EntityModel<Customer>> performList() {
         return repository.findAll().stream() //
                 .map(assembler::toModel) //
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     @Override
     public EntityModel<Customer> performDetail(Long id) throws CustomerNotFoundException {
         return assembler.toModel(repository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id)));
     }
+
 
 }

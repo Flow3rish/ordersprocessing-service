@@ -11,14 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import cloud.chrubasik.ordersprocessing.order.Order;
+import cloud.chrubasik.ordersprocessing.order.model.Order;
 
 @Entity
 @Table(name = "customers")
 public class Customer {
     private @Id @GeneratedValue Long id;
     private String name;
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER,
         cascade = CascadeType.ALL)
     private Set<Order> orders;
 
@@ -27,6 +27,15 @@ public class Customer {
 
     public Customer(String name) {
         this.name = name;
+    }
+
+    /**
+     * model a customer with known id used as one to many entity
+     * 
+     * @param id
+     */
+    public Customer(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

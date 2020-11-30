@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import cloud.chrubasik.ordersprocessing.customer.Customer;
 import cloud.chrubasik.ordersprocessing.customer.CustomerController;
+import cloud.chrubasik.ordersprocessing.order.OrderController;
 
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
@@ -21,6 +22,10 @@ public class CustomerModelAssembler implements RepresentationModelAssembler<Cust
         return EntityModel.of(entity, //
                 WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class).one(entity.getId()))
                         .withSelfRel(),
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class)).withRel("customers"));
+                        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class).all())
+                                        .withRel("customers"),
+                        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(OrderController.class).all(entity.getId()))
+                                        .withRel("ordersList"));
+
     }
 }

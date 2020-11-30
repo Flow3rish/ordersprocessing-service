@@ -3,8 +3,8 @@ package cloud.chrubasik.ordersprocessing.order.jpa;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 
-import cloud.chrubasik.ordersprocessing.order.Order;
-import cloud.chrubasik.ordersprocessing.order.OrderController;
+import cloud.chrubasik.ordersprocessing.customer.CustomerController;
+import cloud.chrubasik.ordersprocessing.order.model.Order;
 
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Component;
@@ -19,9 +19,11 @@ public class OrderModelAssembler implements RepresentationModelAssembler<Order, 
     @Override
     public EntityModel<Order> toModel(Order entity) {
 
+
         return EntityModel.of(entity, //
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(OrderController.class).one(entity.getId()))
-                        .withSelfRel(),
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(OrderController.class)).withRel("orders"));
+                WebMvcLinkBuilder
+                        .linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class).one(entity.getCustomer().getId()))
+                        .slash(entity.getId()).withSelfRel()); // TODO dodelat linky
     }
+
 }
