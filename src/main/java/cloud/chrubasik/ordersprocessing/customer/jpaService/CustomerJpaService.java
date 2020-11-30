@@ -35,8 +35,8 @@ public class CustomerJpaService implements CustomerService {
     }
 
     @Override
-    public Customer performDetail(Long id) {
-        return repository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
+    public EntityModel<Customer> performDetail(Long id) throws CustomerNotFoundException {
+        return assembler.toModel(repository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id)));
     }
 
 }

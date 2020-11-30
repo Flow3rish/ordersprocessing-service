@@ -26,10 +26,10 @@ public class CustomerController {
     @Autowired
     CustomerService service;
 
-    @Operation(summary = "Gets a list of all Customers.")
+    @Operation(summary = "Gets a list of all customers.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
-                    description = "A list of all books",
+                    description = "A list of all customers",
                     content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Customer.class)))}),
     })
     @GetMapping
@@ -37,8 +37,11 @@ public class CustomerController {
         return service.performList();
     }
 
+    @Operation(summary = "Gets detail of one customer by id.")
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "A detail of a customer", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class)) }), })
     @GetMapping("/{id}")
-    public Customer one(@PathVariable Long id) {
+    public EntityModel<Customer> one(@PathVariable Long id) {
         return service.performDetail(id);
     }
 }

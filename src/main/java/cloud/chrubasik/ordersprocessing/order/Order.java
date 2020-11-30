@@ -30,6 +30,11 @@ public class Order {
         this.customer = customer;
     }
 
+    public Order(Order order) {
+        this.description = order.description;
+        this.customer = order.customer;
+    }
+
     public Long getId() {
         return this.id;
     }
