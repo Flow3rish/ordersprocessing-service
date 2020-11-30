@@ -1,17 +1,28 @@
 package cloud.chrubasik.ordersprocessing.customer;
 
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity; // store in jpa-based data store
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import cloud.chrubasik.ordersprocessing.order.Order;
 
 @Entity
+@Table(name = "customers")
 public class Customer {
     private @Id @GeneratedValue Long id;
     private String name;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY,
+        cascade = CascadeType.ALL)
+    private Set<Order> orders;
 
-    Customer() {}
+    public Customer() {}
 
 
     public Customer(String name) {
