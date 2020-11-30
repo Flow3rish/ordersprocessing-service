@@ -1,4 +1,4 @@
-package cloud.chrubasik.ordersprocessing.customer.jpa;
+package cloud.chrubasik.ordersprocessing.customer.jpaService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,7 +8,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
 
 import cloud.chrubasik.ordersprocessing.customer.Customer;
-import cloud.chrubasik.ordersprocessing.customer.CustomerModelAssembler;
 import cloud.chrubasik.ordersprocessing.customer.CustomerNotFoundException;
 import cloud.chrubasik.ordersprocessing.customer.CustomerService;
 
@@ -31,13 +30,13 @@ public class CustomerJpaService implements CustomerService {
     @Override
     public List<EntityModel<Customer>> performList() {
         return repository.findAll().stream() //
-            .map(assembler::toModel) //
-            .collect(Collectors.toList());
+                .map(assembler::toModel) //
+                .collect(Collectors.toList());
     }
 
     @Override
     public Customer performDetail(Long id) {
         return repository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
     }
-    
+
 }

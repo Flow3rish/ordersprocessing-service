@@ -18,7 +18,7 @@ public class Order {
     private @Id @GeneratedValue Long id;
     private String description;
     @ManyToOne(fetch = FetchType.EAGER) 
-    @JoinColumn(name = "customer_id", nullable = false) // TODO skoncil jsem tady
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
 

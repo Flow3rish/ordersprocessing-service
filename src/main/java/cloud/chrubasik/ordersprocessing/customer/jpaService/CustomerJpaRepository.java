@@ -1,4 +1,4 @@
-package cloud.chrubasik.ordersprocessing.customer.jpa;
+package cloud.chrubasik.ordersprocessing.customer.jpaService;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
