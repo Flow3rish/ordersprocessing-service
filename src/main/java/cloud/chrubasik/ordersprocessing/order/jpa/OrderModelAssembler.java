@@ -28,7 +28,7 @@ public class OrderModelAssembler implements RepresentationModelAssembler<Order, 
                         .linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class).one(entity.getCustomer().getId()))
                         .withRel("customer")
 
-        ); // TODO dodelat linky
+        );
     }
 
 }

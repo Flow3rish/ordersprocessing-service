@@ -18,9 +18,6 @@ public class OrderJpaDao implements OrderDao {
     @Autowired
     private final OrderJpaRepository orderRepository;
 
-    // @Autowired
-    // private final CustomerDao customerDao;
-
     @Autowired
     private final OrderModelAssembler assembler;
 

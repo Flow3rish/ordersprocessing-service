@@ -11,7 +11,7 @@ import cloud.chrubasik.ordersprocessing.order.model.OrderToPost;
 public interface OrderService {
     public Set<EntityModel<Order>> performListSetForCustomer(Long customerId);
 
-    public EntityModel<Order> performDetail(Long id) throws OrderNotFoundException;
+    public EntityModel<Order> performDetail(Long orderId, Long customerId) throws OrderNotFoundException;
 
     public EntityModel<Order> performCreate(OrderToPost order, Long customerId);
 
