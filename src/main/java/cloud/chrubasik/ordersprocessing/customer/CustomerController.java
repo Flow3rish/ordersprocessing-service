@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cloud.chrubasik.ordersprocessing.customer.model.Customer;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -43,7 +45,7 @@ public class CustomerController {
     @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "A detail of a customer", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class)) }), })
     @GetMapping("/{id}")
-    public EntityModel<Customer> one(@PathVariable Long id) {
+    public EntityModel<Customer> one(@PathVariable @Parameter(in = ParameterIn.PATH, description = "Id of the customer") Long id) {
         return service.performDetail(id);
     }
 
