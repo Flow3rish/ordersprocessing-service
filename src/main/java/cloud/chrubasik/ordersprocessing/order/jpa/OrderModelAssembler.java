@@ -23,7 +23,12 @@ public class OrderModelAssembler implements RepresentationModelAssembler<Order, 
         return EntityModel.of(entity, //
                 WebMvcLinkBuilder
                         .linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class).one(entity.getCustomer().getId()))
-                        .slash(entity.getId()).withSelfRel()); // TODO dodelat linky
+                        .slash(entity.getId()).withSelfRel(),
+                WebMvcLinkBuilder
+                        .linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class).one(entity.getCustomer().getId()))
+                        .withRel("customer")
+
+        ); // TODO dodelat linky
     }
 
 }

@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 import cloud.chrubasik.ordersprocessing.order.model.Order;
 import cloud.chrubasik.ordersprocessing.order.jpa.OrderJpaRepository;
-import cloud.chrubasik.ordersprocessing.customer.Customer;
-import cloud.chrubasik.ordersprocessing.customer.jpaService.CustomerJpaRepository;
+import cloud.chrubasik.ordersprocessing.customer.jpa.CustomerJpaRepository;
+import cloud.chrubasik.ordersprocessing.customer.model.Customer;
 
 @Configuration
 /**
@@ -29,7 +29,9 @@ class LoadDatabase {
             log.info("Preloading " + customerJpaRepository.save(customer1));
             log.info("Preloading " + customerJpaRepository.save(customer2));
             log.info("Preloading " + orderJpaRepository.save(new Order("2x rohlik", customer1)));
-            log.info("Preloading " + orderJpaRepository.save(new Order("2x okurka", customer2)));
+            log.info("Preloading " + orderJpaRepository.save(new Order("3x banan", customer1)));
+            log.info("Preloading " + orderJpaRepository.save(new Order("5x houska", customer1)));
+            log.info("Preloading " + orderJpaRepository.save(new Order("1x okurka", customer2)));
         };
     }
 }

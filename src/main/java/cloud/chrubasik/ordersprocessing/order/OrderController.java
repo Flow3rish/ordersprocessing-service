@@ -5,11 +5,13 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cloud.chrubasik.ordersprocessing.order.model.Order;
@@ -33,4 +35,11 @@ public class OrderController {
             @RequestBody final OrderToPost orderFromRequest) {
         return service.performCreate(orderFromRequest, customerId);
     }
+
+    @DeleteMapping
+    public EntityModel<Order> deleteOrder(@PathVariable Long customerId, @RequestParam Long orderId) {
+        // TODO return something else (a message with less information)
+        return service.performDelete(orderId, customerId);
+    }
+
 }

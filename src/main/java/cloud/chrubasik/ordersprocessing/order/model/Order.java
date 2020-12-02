@@ -4,20 +4,17 @@ import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import cloud.chrubasik.ordersprocessing.customer.Customer;
+import cloud.chrubasik.ordersprocessing.customer.model.Customer;
 
 @Entity
 @Table(name = "orders")
 public class Order extends OrderToPost {
-    private @Id @GeneratedValue Long id;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -37,13 +34,6 @@ public class Order extends OrderToPost {
         this.customer = customer;
     }
 
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Customer getCustomer() {
         return this.customer;
@@ -53,10 +43,6 @@ public class Order extends OrderToPost {
         this.customer = customer;
     }
 
-    public Order id(Long id) {
-        this.id = id;
-        return this;
-    }
 
     public Order description(String description) {
         this.description = description;

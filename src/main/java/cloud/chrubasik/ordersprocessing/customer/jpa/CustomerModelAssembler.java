@@ -1,10 +1,10 @@
-package cloud.chrubasik.ordersprocessing.customer.jpaService;
+package cloud.chrubasik.ordersprocessing.customer.jpa;
 
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
-import cloud.chrubasik.ordersprocessing.customer.Customer;
+import cloud.chrubasik.ordersprocessing.customer.model.Customer;
 import cloud.chrubasik.ordersprocessing.customer.CustomerController;
 import cloud.chrubasik.ordersprocessing.order.OrderController;
 
@@ -22,10 +22,10 @@ public class CustomerModelAssembler implements RepresentationModelAssembler<Cust
         return EntityModel.of(entity, //
                 WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class).one(entity.getId()))
                         .withSelfRel(),
-                        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class).all())
-                                        .withRel("customers"),
-                        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(OrderController.class).all(entity.getId()))
-                                        .withRel("ordersList"));
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class).all())
+                        .withRel("customers"),
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(OrderController.class).all(entity.getId()))
+                        .withRel("ordersList"));
 
     }
 }
