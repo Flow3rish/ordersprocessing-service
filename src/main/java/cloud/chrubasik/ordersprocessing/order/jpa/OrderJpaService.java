@@ -22,7 +22,6 @@ class OrderJpaServiceException extends RuntimeException {
 
     private final String messageDestination;
 
-    private final JmsTemplate jmsTemplate;
 
     /**
      * basic throw
@@ -32,7 +31,6 @@ class OrderJpaServiceException extends RuntimeException {
     public OrderJpaServiceException(String s) {
         super(s);
         this.messageDestination = null;
-        this.jmsTemplate = null;
     }
 
     /**
@@ -45,7 +43,6 @@ class OrderJpaServiceException extends RuntimeException {
     public OrderJpaServiceException(String messageDestination, JmsTemplate jmsTemplate, String s) {
         super(s);
         this.messageDestination = messageDestination;
-        this.jmsTemplate = jmsTemplate;
         jmsTemplate.convertAndSend(this.messageDestination, s);
     }
 
@@ -106,7 +103,7 @@ public class OrderJpaService implements OrderService {
     }
 
     @Override
-    public EntityModel<Order> performDelete(Long orderId, Long customerId) {
+    public Order performDelete(Long orderId, Long customerId) {
         try {
             Order order = orderDao.getRawOrderById(orderId);
             Customer customer = customerDao.getRawCustomerById(customerId);
@@ -117,7 +114,7 @@ public class OrderJpaService implements OrderService {
                         String.format("Customer %d doesn't own order %d", customerId, orderId));
             }
 
-            EntityModel<Order> deletedOrderEm = orderDao.deleteOrderById(orderId);
+            Order deletedOrderEm = orderDao.deleteOrderById(orderId);
             this.jmsTemplate.convertAndSend(this.messageDestination,
                     "deleted order " + orderId + " for customer" + customer);
 

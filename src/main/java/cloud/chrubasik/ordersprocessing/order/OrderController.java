@@ -3,7 +3,6 @@ package cloud.chrubasik.ordersprocessing.order;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +27,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @RestController
 @RequestMapping("customers/{customerId}/orders")
 public class OrderController {
-    // TODO napsat dokumentaci
 
 
     @Autowired
@@ -66,8 +64,9 @@ public class OrderController {
     @Operation(summary = "Delete order by id for customer.")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = Order.class)) }), })
-    @DeleteMapping("/{orderId}")
-    public EntityModel<Order> deleteOrder(@Parameter(in = ParameterIn.PATH, description = "customer for whom to delete an order") @PathVariable Long customerId, @RequestParam @Parameter(in = ParameterIn.PATH, description = "Id of the order to delete") Long orderId) {
+    // @DeleteMapping("/{orderId}")
+    @DeleteMapping
+    public Order deleteOrder(@Parameter(in = ParameterIn.PATH, description = "customer for whom to delete an order") @PathVariable Long customerId, @RequestParam @Parameter(in = ParameterIn.QUERY, description = "Id of the order to delete") Long orderId) {
         // TODO might return something else (a message with less information)
         return service.performDelete(orderId, customerId);
     }

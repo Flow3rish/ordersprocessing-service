@@ -15,6 +15,6 @@ public interface OrderService {
 
     public EntityModel<Order> performCreate(OrderToPost order, Long customerId);
 
-    public EntityModel<Order> performDelete(Long orderId, Long customerId) throws RuntimeException;
+    public Order performDelete(Long orderId, Long customerId) throws RuntimeException;
 
 }

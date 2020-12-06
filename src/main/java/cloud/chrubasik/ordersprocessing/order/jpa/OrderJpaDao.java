@@ -49,10 +49,10 @@ public class OrderJpaDao implements OrderDao {
     }
 
     @Override
-    public EntityModel<Order> deleteOrderById(Long id) {
+    public Order deleteOrderById(Long id) {
         Order order = orderRepository.findById(id).orElseThrow(() -> new OrderNotFoundException(id));
         orderRepository.deleteById(id);
-        return assembler.toModel(order);
+        return order;
     }
 
 }

@@ -25,7 +25,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @RestController
 @RequestMapping("customers")
 public class CustomerController {
-    // TODO napsat dokumentaci
 
     @Autowired
     CustomerService service;

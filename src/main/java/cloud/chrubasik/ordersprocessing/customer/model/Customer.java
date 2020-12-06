@@ -3,7 +3,6 @@ package cloud.chrubasik.ordersprocessing.customer.model;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity; // store in jpa-based data store
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,7 +15,7 @@ import cloud.chrubasik.ordersprocessing.order.model.Order;
 public class Customer {
     private @Id @GeneratedValue Long id;
     private String name;
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private Set<Order> orders;
 
     public Customer() {

@@ -19,7 +19,7 @@ public interface OrderDao {
 
     public EntityModel<Order> getOrderById(Long id) throws OrderNotFoundException;
 
-    public EntityModel<Order> deleteOrderById(Long id) throws OrderNotFoundException;
+    public Order deleteOrderById(Long id) throws OrderNotFoundException;
 
     public Order getRawOrderById(Long id) throws OrderNotFoundException;
 

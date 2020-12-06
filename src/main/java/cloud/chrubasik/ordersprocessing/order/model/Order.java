@@ -16,24 +16,25 @@ import cloud.chrubasik.ordersprocessing.customer.model.Customer;
 
 @Entity
 @Table(name = "orders") // order is a reserved word
-public class Order extends OrderToPost {
+public class Order extends AbstractOrder {
 
     private @Id @GeneratedValue Long id;
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+    private String description;
 
     public Order() {
     }
 
     public Order(String description, Customer customer) {
-        super(description);
+        this.description = description;
         this.customer = customer;
     }
 
     public Order(OrderToPost otp, Customer customer) {
-        super(otp);
+        this.description = otp.getDescription();
         this.customer = customer;
     }
 
